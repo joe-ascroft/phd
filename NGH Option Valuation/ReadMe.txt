@@ -1,0 +1,1 @@
+ROV is applied to analyse extraction decision-making applied to NGH deposits.
