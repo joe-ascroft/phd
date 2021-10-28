@@ -41,15 +41,6 @@ c_tax = 0.4
 
 switch = (0.2, 0.6)
 
-
-# node construction #
-
-class node:
-    def __init__(self, value, temp):
-        self.value = v
-        self.temp = t
-
-
 # finite difference parameter definition ##
 
 # parameter defn for P_i in i = 2,...,i_max-1 #
