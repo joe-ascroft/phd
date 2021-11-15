@@ -23,7 +23,8 @@ class State:
 M = 2
 N = 2
 
-state_1 = State(4, 0.1, 0.1, 0.05)
+state_1 = State(3, 0.05, 0.1, 0.05)
+state_2 = State(2.5,0.05,0.1,0.05)
 
 
 def Profit(E, P, vc, fc, pi_tax, c_tax):
@@ -92,7 +93,7 @@ p_steps = int((p_max - p_1) / p_step)
 s0_1 = 100000
 s0_max = 500000
 
-# lattice construction ##
+# lattice construction #
 
 P_grid_lower = list(range(5, 40, p_steps))
 P_grid_middle = list(range(41, 66, 1))
@@ -100,17 +101,18 @@ P_grid_upper = list(range(68, 80, 2))
 P_grid_high = list(range(85, 110, 5))
 P_grid_vhigh = list(range(120, 160, 10))
 
-P_grid = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 7, 11]
+P_grid = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 8, 11]
 
 s0_grid = list(range(s0_1, s0_max, s0_step))
 
-temp_node = np.full((len(P_grid), len(s0_grid), M, N), 0)
-node_value = np.full((len(P_grid), len(s0_grid), M, N), 0)
-Lv = np.full((len(P_grid), len(s0_grid), M, N), 0)
+S = 2
+temp_node = np.full((S,len(P_grid), len(s0_grid), M, N), 0)
+node_value = np.full((S,len(P_grid), len(s0_grid), M, N), 0)
+Lv = np.full((S,len(P_grid), len(s0_grid), M, N), 0)
 
 # here we store the optimal state n in N conditional on prior state m in M ##
 
-temp_path = np.full((len(P_grid), len(s0_grid), M), 0)
+temp_path = np.full((S,len(P_grid), len(s0_grid), M), 0)
 opt_path = []
 
 cost = np.zeros((2, 2))
@@ -127,77 +129,96 @@ for t in range(20):
 ## M refers to adjacent state, N refers to current state ##
 
 ## Quarterly profit at each node ##
-
-        for i in range(len(P_grid)):
-            for k in range(len(s0_grid)):
-                for m in range(M):
-                    for n in range(N):
-                        if n == 1:
-                            if (120 - (t*4 + q))*E < s0_grid[k]:
-                                temp_node[i,k,m,n] = temp_node[i,k,m,n] + Profit(E,P_grid[i],vc,fc,pi_tax,c_tax)
+        for s in range(2):
+            for i in range(len(P_grid)):
+                for k in range(len(s0_grid)):
+                    for m in range(M):
+                        for n in range(N):
+                            if n == 1:
+                                if (120 - (t*4 + q))*E < s0_grid[k]:
+                                    temp_node[s,i,k,m,n] = temp_node[s,i,k,m,n] + Profit(E,P_grid[i],vc,fc,pi_tax,c_tax)
+                                else:
+                                    temp_node[s,i,k,m,n] = temp_node[s,i,k,m,n] - fc
                             else:
-                                temp_node[i,k,m,n] = temp_node[i,k,m,n] - fc
-                        else:
-                            temp_node[i,k,m,n] = temp_node[i,k,m,n] - fc
+                                temp_node[s,i,k,m,n] = temp_node[s,i,k,m,n] - fc
 
 ## Lagrange Differential at each node ##
 
 ## then we loop over lagrange differential for nodes inside the boundary ##
-
-        for i in range(1,len(P_grid) - 1):
-            for k in range(len(s0_grid)):
-                for m in range(M):
-                    for n in range(N):
-                        diff = difference(P_grid[i],p_step,state_1.s,state_1.e,state_1.m)
-                        Lv[i,k,m,n] = diff[0]*temp_node[i - 1,k,m,n] + diff[1]*temp_node[i + 1,k,m,n] - (diff[0]+diff[1]+r)*temp_node[i,k,m,n]
+        for s in range(2):
+            for i in range(1,len(P_grid) - 1):
+                for k in range(len(s0_grid)):
+                    for m in range(M):
+                        for n in range(N):
+                            if s == 0:
+                                diff = difference(P_grid[i],p_step,state_1.s,state_1.e,state_1.m)
+                                Lv[s,i,k,m,n] = diff[0]*temp_node[s,i - 1,k,m,n] + diff[1]*temp_node[s,i + 1,k,m,n] - (diff[0]+diff[1]+r)*temp_node[s,i,k,m,n] + state_1.l*(temp_node[0,i,k,m,n]-temp_node[1,i,k,m,n])
+                            else:
+                                diff = difference(P_grid[i],p_step,state_2.s,state_2.e,state_2.m)
+                                Lv[s,i,k,m,n] = diff[0]*temp_node[s,i - 1,k,m,n] + diff[1]*temp_node[s,i + 1,k,m,n] - (diff[0]+diff[1]+r)*temp_node[s,i,k,m,n] + state_2.l*(temp_node[1,i,k,m,n]-temp_node[0,i,k,m,n])
 
 ## we loop over Lagrange differential for boundary nodes ##
 
-        for k in range(len(s0_grid)):
-            for m in range(M):
-                for n in range(N):
-                    diff = difference_min(P_grid[0],(P_grid[1]-P_grid[0]),state_1.e,state_1.m)
-                    Lv[0,k,m,n] = diff[1]*temp_node[1,k,m,n] - (diff[1]+r)*temp_node[0,k,m,n]
-
-        for k in range(len(s0_grid)):
-            for m in range(M):
-                for n in range(N):
-                    diff = difference_max(P_grid[len(P_grid)-1],(P_grid[len(P_grid)-1]-P_grid[len(P_grid)-2]),state_1.e,state_1.m)
-                    Lv[len(P_grid) - 1,k,m,n] = diff[0]*temp_node[len(P_grid)-2,k,m,n] - (diff[0]+r)*temp_node[len(P_grid)-1,k,m,n]
-
-## then we apply Lv to temporary node values ##
-        for i in range(len(P_grid)):
+        for s in range(2):
             for k in range(len(s0_grid)):
                 for m in range(M):
                     for n in range(N):
-                        temp_node[i,k,m,n] = temp_node[i,k,m,n] + Lv[i,k,m,n]
+                        if s == 0:
+                            diff = difference_min(P_grid[0],(P_grid[1]-P_grid[0]),state_1.e,state_1.m)
+                            Lv[s,0,k,m,n] = diff[1]*temp_node[s,1,k,m,n] - (diff[1]+r)*temp_node[s,0,k,m,n] + state_1.l*(temp_node[0,i,k,m,n]-temp_node[1,i,k,m,n])
+                        else:
+                            diff = difference_min(P_grid[0],(P_grid[1]-P_grid[0]),state_2.e,state_2.m)
+                            Lv[s,0,k,m,n] = diff[1]*temp_node[s,1,k,m,n] - (diff[1]+r)*temp_node[s,0,k,m,n] + state_2.l*(temp_node[1,i,k,m,n]-temp_node[0,i,k,m,n])
+
+        for s in range(2):
+            for k in range(len(s0_grid)):
+                for m in range(M):
+                    for n in range(N):
+                        if s == 0:
+                            diff = difference_max(P_grid[len(P_grid)-1],(P_grid[len(P_grid)-1]-P_grid[len(P_grid)-2]),state_1.e,state_1.m)
+                            Lv[s,len(P_grid) - 1,k,m,n] = diff[0]*temp_node[s,len(P_grid)-2,k,m,n] - (diff[0]+r)*temp_node[s,len(P_grid)-1,k,m,n] + state_1.l*(temp_node[0,i,k,m,n]-temp_node[1,i,k,m,n])
+                        else:
+                            diff = difference_max(P_grid[len(P_grid)-1],(P_grid[len(P_grid)-1]-P_grid[len(P_grid)-2]),state_2.e,state_2.m)
+                            Lv[s,len(P_grid) - 1,k,m,n] = diff[0]*temp_node[s,len(P_grid)-2,k,m,n] - (diff[0]+r)*temp_node[s,len(P_grid)-1,k,m,n] + state_2.l*(temp_node[1,i,k,m,n]-temp_node[0,i,k,m,n])
+
+## then we apply Lv to temporary node values ##
+        for s in range(2):
+            for i in range(len(P_grid)):
+                for k in range(len(s0_grid)):
+                    for m in range(M):
+                        for n in range(N):
+                            temp_node[s,i,k,m,n] = temp_node[s,i,k,m,n] + Lv[s,i,k,m,n]
 
 
 ## we apply conditional costs on each state ##
 
-    for i in range(len(P_grid)):
-        for k in range(len(s0_grid)):
-            for m in range(M):
-                for n in range(N):
-                    temp_node[i,k,m,n] = temp_node[i,k,m,n] - cost[m,n]
+    for s in range(2):
+        for i in range(len(P_grid)):
+            for k in range(len(s0_grid)):
+                for m in range(M):
+                    for n in range(N):
+                        temp_node[s,i,k,m,n] = temp_node[s,i,k,m,n] - cost[m,n]
 
 ## we identify the optimal conditional state n in N for every adjacent state m in M ##
 
-    for i in range(len(P_grid)):
-        for k in range(len(s0_grid)):
-            for m in range(M):
-                for n in range(N):
-                    temp_compare[n] = temp_node[i,k,m,n]
-                temp_path[i,k,m] = np.argmax(temp_compare)
+    for s in range(2):
+        for i in range(len(P_grid)):
+            for k in range(len(s0_grid)):
+                for m in range(M):
+                    for n in range(N):
+                        temp_compare[n] = temp_node[s,i,k,m,n]
+                    temp_path[s,i,k,m] = np.argmax(temp_compare)
 
 ## we for the next cycle, we adjust option value ##
 
-    for i in range(len(P_grid)):
-        for k in range(len(s0_grid)):
-            for m in range(M):
-                for n in range(N):
-                    node_value[i,k,m,n] = temp_node[i,k,m,(temp_path[i,k,m])]
-                    temp_node[i,k,m,n] = node_value[i,k,m,n]
+    for s in range(2):
+        for i in range(len(P_grid)):
+            for k in range(len(s0_grid)):
+                for m in range(M):
+                    for n in range(N):
+                        node_value[s,i,k,m,n] = temp_node[s,i,k,m,(temp_path[s,i,k,m])]
+                        temp_node[s,i,k,m,n] = node_value[s,i,k,m,n]
 
+print(temp_node[0,:,:,:,:])
 
 
