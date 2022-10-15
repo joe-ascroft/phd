@@ -1,0 +1,465 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 This GEMPACK log file was created at 13:55:33 on 24-JUL-2022 by the program\
+  <gtap.for 09-SEP-2020 (a TABLO-generated program)>\
+ which accesses some of the routines in the GEMPACK software release\
+  <GEMPACK Release 12.1.003   January 2020>\
+\
+\
+  (Processing command line options.)\
+\
+\
+  (Opening log file 'GTAP.log')\
+ (Opened new text file 'GTAP.log'.)\
+ Sending output just to a log file\
+\
+\
+ <gtap.for 09-SEP-2020 (a TABLO-generated program)>\
+   This program accesses some of the routines in the GEMPACK software release\
+ <GEMPACK Release 12.1.003   January 2020>\
+\
+ Licence file: C:\\GP\\licen.gem\
+\
+     -------------------------------------------------------\
+    !            GEMPACK Software System Licence            !\
+    !   Single-user Executable-image Licence for GEMPACK    !\
+    !                 Licence No.  GES-0666                 !\
+    !          Licence for Release 12.2 of GEMPACK          !\
+    !                Individual RunGTAP user                !\
+    !                    For course use                     !\
+    !    (Your GEMPACK licence expires on 05-MAR-2030.)     !\
+     -------------------------------------------------------\
+\
+\
+     << COPYRIGHT 1987-2018: CoPS/Impact and KPSOFT >>\
+\
+  Current directory is: C:\\runGTAP375\\work\
+\
+\
+  Full path name of running EXE is: C:\\runGTAP375\\gtap.exe\
+  Fortran compiler = GF64   version 6.4.0 64 bit\
+  BLAS library: OpenBlas\
+  OPENMP number of threads: 4\
+  Gempack source corresponds to revision 1156.\
+  Operating System is Microsoft Windows 11 Home\
+\
+\
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+\
+\
+                    TABLO-GENERATED PROGRAM OPTIONS\
+               ( --> indicates those in effect )\
+\
+       BAT Run in batch              STI Take inputs from a Stored-input file\
+       BPR Brief prompts             SIF Store inputs on a file\
+   --> LOG Output to log file        ASI Add to incomplete Stored-input file\
+                                     CMF Take inputs from a Command file\
+       EAA Echo all activity           SVX Select variables on XAC file (later)\
+   --> CPU Report CPU times            RQF Required figures agreement (extrap)\
+       NRP Don't reuse pivots        NIR Don't do solution iterative refinement\
+                                 --> IZ1 Ignore zero coefficients in step 1\
+                                     KZ2 Keep zero coefficients in steps 2,3 etc\
+       NEQ Do no equations           NWE Don't warn how well equations solved\
+       NDS Do no displays            SSI Several subintervals; extrap after each\
+       NWR Do no writes              M28 Use MA28 routines (rather than MA48)\
+       NAS Do no assertions          SUI Save updated formula(initial) data\
+       NUD Do no final updates              Extra Options Screen\
+       NSM Don't do simulation              --------------------\
+       NWT Use Newton's method      DTO Display, Terminal/Text write Options\
+       CR  Check-on-read options\
+\
+  Select an option   :  <opt>      Deselect an option      : -<opt>\
+  Help for an option : ?<opt>      Help on all options     : ??\
+  Redisplay options  : /           Finish option selection : Carriage return\
+\
+ (Opened, as text, existing file 'GTAP.cmf'.)\
+  (Taking inputs from a command file.)\
+ (Opened, as text, existing file 'GTAP.cmf'.)\
+\
+  !  (There is no CREATION information on this file.)\
+\
+\
+  --> Reading the Command file.\
+\
+ ! This Command file\
+ ! C:\\runGTAP375\\work\\GTAP.cmf\
+ ! was written by RunGTAP (Version 3.75 built 10/Mar/2021)\
+ aux files = C:\\runGTAP375\\GTAP;\
+ file gtapSETS = C:\\runGTAP375\\newtest\\sets.har;\
+ file gtapDATA = C:\\runGTAP375\\newtest\\basedata.har;\
+ Updated file gtapDATA = gdata.upd;\
+ Solution file = C:\\runGTAP375\\work\\GTAP;\
+ file gtapPARM = C:\\runGTAP375\\newtest\\default.prm;\
+ Verbal Description =\
+ Numeraire shock;\
+ Method = Johansen;\
+ Steps = 1;\
+ automatic accuracy = no;\
+ exogenous\
+           pop\
+           psaveslack pfactwld\
+           profitslack incomeslack endwslack\
+           cgdslack tradslack\
+           ams atm atf ats atd\
+           aosec aoreg avasec avareg\
+           afcom afsec afreg afecom afesec afereg\
+           aoall afall afeall\
+           au dppriv dpgov dpsave\
+           to tp tm tms tx txs\
+           qo(ENDW_COMM,REG) ;\
+ Rest Endogenous ;\
+ shock pfactwld = uniform 10;\
+\
+  (Finished reading the command file.)\
+\
+  Auxiliary Statement File\
+  ---------------------\
+ (Opened, as binary, existing file 'C:\\runGTAP375\\gtap.axs'.)\
+\
+  Auxiliary Table File\
+  -----------------\
+ (Opened, as header, existing file 'C:\\runGTAP375\\gtap.axt'.)\
+\
+  !  This file was created at 13:51:02 on 09-SEP-2020 by the program\
+  !    <TABLO  Version 7.0   August 2018>\
+  !  which accesses some of the routines in the GEMPACK software release\
+  !    <GEMPACK Release 12.1.003   January 2020>\
+  !  [The program which created this file was compiled with GF64.]\
+\
+ Auxiliary Table File was created by TABLO at 13:51:02 on 09-SEP-2020\
+ [TABLO file used here is "gtap.tab".]\
+ [No TABLO STI file used when TABLO was run.]\
+\
+  Using Gempack optimized version of LU decompositions\
+  With this option active several old options are obsolete.\
+  These options concern: Markowitz pivots, and those starting with pivots, MA48 and MA28.\
+\
+  Search depth for LU is set to 32\
+  Column Filter threshold is set to 5.0000001E-02\
+  Harwell paramter for reuse is set to -1.000000\
+\
+ [This TG-program was created by TABLO at 13:51:02 on 09-SEP-2020.]\
+ When TABLO was run, GPDIR="C:\\GP"\
+\
+  [Starting to check "extra" statements on the Command file.]\
+\
+\
+  [Finished checking "extra" statements on the Command file.]\
+\
+\
+ ++++++++++++++++++++++++++++++++++++++++++++++++++\
+  This program was written by the GEMPACK program TABLO\
+  as described in the Information file\
+  'gtap.inf\
+\
+  This run of the TABLO-generated program\
+      o can create the Equations file (for the condensed system)\
+      o can check 2 ASSERTIONs\
+      o can carry out multi-step simulations\
+\
+ ++++++++++++++++++++++++++++++++++++++++++++++++++\
+\
+  (Automatic accuracy testing will not be done.)\
+ (Range test of updated or extrapolated values will produce warnings.)\
+\
+  (Using Johansen's method.)\
+ (Range test of initial values will produce warnings.)\
+  (Model is ''.   Version number is 1.)\
+ (Opened new header file 'C:\\runGTAP375\\work\\GTAP.sl4'.)\
+ (Solution file is 'C:\\runGTAP375\\work\\GTAP.sl4'.)\
+ (Opened new header file 'C:\\runGTAP375\\work\\GTAP.slc'.)\
+ (Opened, as text, existing file 'GTAP.cmf'.)\
+\
+  !  (There is no CREATION information on this file.)\
+\
+\
+  (Data file with logical name 'GTAPSETS')\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\sets.har'.)\
+\
+  !  This file was created at 13:45:42 on 24-JUL-2022 by the program\
+  !    <aggdat.for 10-FEB-2016> [aggdat.tab]\
+  !  which accesses some of the routines in the GEMPACK software release\
+  !    <GEMPACK Release 11.3.001   May 2014>\
+  !  [The program which created this file was compiled with GF32.]\
+\
+\
+  (Data file with logical name 'GTAPDATA')\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\basedata.har'.)\
+\
+  !  This file was created at 13:45:42 on 24-JUL-2022 by the program\
+  !    <aggdat.for 10-FEB-2016> [aggdat.tab]\
+  !  which accesses some of the routines in the GEMPACK software release\
+  !    <GEMPACK Release 11.3.001   May 2014>\
+  !  [The program which created this file was compiled with GF32.]\
+\
+\
+  (Data file with logical name 'GTAPPARM')\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\default.prm'.)\
+\
+  !  This file was created at 13:45:42 on 24-JUL-2022 by the program\
+  !    <aggpar.for 10-FEB-2016> [aggpar.tab]\
+  !  which accesses some of the routines in the GEMPACK software release\
+  !    <GEMPACK Release 11.3.001   May 2014>\
+  !  [The program which created this file was compiled with GF32.]\
+\
+\
+  UPDATED VERSION OF DATA FILE WITH LOGICAL NAME 'GTAPDATA\
+  ---------------------------------------------------------\
+ (Opened new header file 'gdata.upd'.)\
+\
+  --->  Beginning the preliminary pass (aimed at sets and subsets).\
+ Set 'REG'\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\sets.har'.)\
+   [Set has size 10.]\
+ Set 'TRAD_COMM'\
+   [Set has size 8.]\
+ Set 'MARG_COMM'\
+   [Set has size 1.]\
+ 'MARG_COMM' as a subset of 'TRAD_COMM'\
+ Set 'NMRG_COMM'\
+   [Set has size 7.]\
+ 'NMRG_COMM' as a subset of 'TRAD_COMM'\
+ Set 'CGDS_COMM'\
+   [Set has size 1.]\
+ Set 'ENDW_COMM'\
+   [Set has size 5.]\
+ Set 'PROD_COMM'\
+   [Set has size 9.]\
+ 'TRAD_COMM' as a subset of 'PROD_COMM'\
+ 'CGDS_COMM' as a subset of 'PROD_COMM'\
+ 'MARG_COMM' as a subset of 'PROD_COMM'\
+ 'NMRG_COMM' as a subset of 'PROD_COMM'\
+ Set 'DEMD_COMM'\
+   [Set has size 13.]\
+ 'ENDW_COMM' as a subset of 'DEMD_COMM'\
+ 'TRAD_COMM' as a subset of 'DEMD_COMM'\
+ 'MARG_COMM' as a subset of 'DEMD_COMM'\
+ 'NMRG_COMM' as a subset of 'DEMD_COMM'\
+ Set 'NSAV_COMM'\
+   [Set has size 14.]\
+ 'DEMD_COMM' as a subset of 'NSAV_COMM'\
+ 'CGDS_COMM' as a subset of 'NSAV_COMM'\
+ 'TRAD_COMM' as a subset of 'NSAV_COMM'\
+ 'MARG_COMM' as a subset of 'NSAV_COMM'\
+ 'NMRG_COMM' as a subset of 'NSAV_COMM'\
+ 'ENDW_COMM' as a subset of 'NSAV_COMM'\
+ 'PROD_COMM' as a subset of 'NSAV_COMM'\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\default.prm'.)\
+ Reading SLUG(ENDW_COMM)\
+ (Read integer array, size 5, header "SLUG".)\
+  Formula for set 'ENDWS_COMM'\
+ Set 'ENDWS_COMM'\
+   [Set has size 2.]\
+ 'ENDWS_COMM' as a subset of 'ENDW_COMM'\
+ 'ENDWS_COMM' as a subset of 'DEMD_COMM'\
+ 'ENDWS_COMM' as a subset of 'NSAV_COMM'\
+ Set 'ENDWM_COMM'\
+   [Set has size 3.]\
+ 'ENDWM_COMM' as a subset of 'ENDW_COMM'\
+ 'ENDWM_COMM' as a subset of 'DEMD_COMM'\
+ 'ENDWM_COMM' as a subset of 'NSAV_COMM'\
+ Set 'ENDWC_COMM'\
+   [Set has size 1.]\
+ 'ENDWC_COMM' as a subset of 'ENDW_COMM'\
+ 'ENDWC_COMM' as a subset of 'DEMD_COMM'\
+ 'ENDWC_COMM' as a subset of 'NSAV_COMM'\
+ [CPU for reads, formulas etc is 0.00 seconds.]\
+ Elapsed time for reads, formulas etc is: less than one second.\
+\
+  ------- MODEL REPORT ------\
+  The un-condensed model contains:\
+      243 variables comprising 31564 components\
+  and 210 equation blocks comprising 24018 separate equations.\
+\
+      55 variables (comprising 18160 components) will be backsolved for.\
+      0 variables (comprising 0 components) were substituted out.\
+      9 variables (comprising 3100 components) were omitted.\
+\
+  So the condensed model contains:\
+      179 variables comprising 10304 components\
+  and 155 equation blocks comprising 5858 separate equations.\
+  ------- END OF MODEL REPORT ------\
+\
+   (1 character strings, each of length 1 read. Header "SVFM")\
+\
+  Total memory currently used for all arrays is approximately 1.94 megabytes.\
+  [This does NOT include memory related to MMNZ, MMNZ1 and MMNZ2. The\
+   associated arrays are not allocated.]\
+  [Add about 5-10 megabytes for the memory used by the code.]\
+  [Total memory currently allocated for Coefficients and Updated\
+   Coefficients is about        0.2 and        0.0 MB respectively.]\
+\
+  --->  Beginning pass number 1 of 1-pass calculation.\
+\
+  CHOICE OF ECONOMIC ENVIRONMENT\
+  (All components of 'pop' chosen to be exogenous.)\
+  (All components of 'psaveslack' chosen to be exogenous.)\
+  (All components of 'pfactwld' chosen to be exogenous.)\
+  (All components of 'profitslack' chosen to be exogenous.)\
+  (All components of 'incomeslack' chosen to be exogenous.)\
+  (All components of 'endwslack' chosen to be exogenous.)\
+  (All components of 'cgdslack' chosen to be exogenous.)\
+  (All components of 'tradslack' chosen to be exogenous.)\
+  (All components of 'ams' chosen to be exogenous.)\
+  (All components of 'atm' chosen to be exogenous.)\
+  (All components of 'atf' chosen to be exogenous.)\
+  (All components of 'ats' chosen to be exogenous.)\
+  (All components of 'atd' chosen to be exogenous.)\
+  (All components of 'aosec' chosen to be exogenous.)\
+  (All components of 'aoreg' chosen to be exogenous.)\
+  (All components of 'avasec' chosen to be exogenous.)\
+  (All components of 'avareg' chosen to be exogenous.)\
+  (All components of 'afcom' chosen to be exogenous.)\
+  (All components of 'afsec' chosen to be exogenous.)\
+  (All components of 'afreg' chosen to be exogenous.)\
+  (All components of 'afecom' chosen to be exogenous.)\
+  (All components of 'afesec' chosen to be exogenous.)\
+  (All components of 'afereg' chosen to be exogenous.)\
+  (All components of 'aoall' chosen to be exogenous.)\
+  (All components of 'afall' chosen to be exogenous.)\
+  (All components of 'afeall' chosen to be exogenous.)\
+  (All components of 'au' chosen to be exogenous.)\
+  (All components of 'dppriv' chosen to be exogenous.)\
+  (All components of 'dpgov' chosen to be exogenous.)\
+  (All components of 'dpsave' chosen to be exogenous.)\
+  (All components of 'to' chosen to be exogenous.)\
+  (All components of 'tp' chosen to be exogenous.)\
+  (All components of 'tm' chosen to be exogenous.)\
+  (All components of 'tms' chosen to be exogenous.)\
+  (All components of 'tx' chosen to be exogenous.)\
+  (All components of 'txs' chosen to be exogenous.)\
+  (The following components of 'qo' have been chosen to be exogenous :\
+  1-5, 15-19, 29-33, 43-47, 57-61, 71-75, 85-89, 99-103, 113-117, 127-131\
+ (Finished specifying closure.)\
+\
+  [ Current closure is valid, namely,\
+    there are 4446 exogenous and 5858 endogenous.]\
+\
+\
+ (Completed specifying a closure.)\
+\
+  (Value of Harwell parameter U to be used is  0.1000000.)\
+\
+  SHOCKS\
+  ------\
+\
+  (All components of 'pfactwld' chosen to be shocked.)\
+  Component 1,  value 10.00000\
+\
+ (Total number of nonzero shocks is 1.)\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\basedata.har'.)\
+ Reading VERNUM\
+ (Read real array, size 1, header "DVER".)\
+  Formula for 'SIZE_TRAD'\
+  Formula for 'SIZE_ENDW'\
+  Formula for 'SIZE_DEMD'\
+  Assertion at line number 201\
+  Formula for 'SIZE_CGDS'\
+  Formula for 'SIZE_PROD'\
+  Assertion at line number 212\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\default.prm'.)\
+ Reading SLUG(ENDW_COMM)\
+ (Read integer array, size 5, header "SLUG".)\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\basedata.har'.)\
+ Reading SAVE(REG)\
+ (Read real array, size 10, header "SAVE".)\
+ Reading VDGA(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VDGA".)\
+ Reading VDGM(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VDGM".)\
+ Reading VIGA(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VIGA".)\
+ Reading VIGM(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VIGM".)\
+ Reading VDPA(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VDPA".)\
+ Reading VDPM(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VDPM".)\
+ Reading VIPA(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VIPA".)\
+ Reading VIPM(TRAD_COMM,REG)\
+ (Read real array, size 8x10, header "VIPM".)\
+ Reading EVOA(ENDW_COMM,REG)\
+ (Read real array, size 5x10, header "EVOA".)\
+ Reading EVFA(ENDW_COMM,PROD_COMM,REG)\
+ (Read real array, size 5x9x10, header "EVFA".)\
+ Reading VDFA(TRAD_COMM,PROD_COMM,REG)\
+ (Read real array, size 8x9x10, header "VDFA".)\
+ Reading VIFA(TRAD_COMM,PROD_COMM,REG)\
+ (Read real array, size 8x9x10, header "VIFA".)\
+ Reading VFM(ENDW_COMM,PROD_COMM,REG)\
+ (Read real array, size 5x9x10, header "VFM".)\
+ Reading VIFM(TRAD_COMM,PROD_COMM,REG)\
+ (Read real array, size 8x9x10, header "VIFM".)\
+ Reading VDFM(TRAD_COMM,PROD_COMM,REG)\
+ (Read real array, size 8x9x10, header "VDFM".)\
+ Reading VDEP(REG)\
+ (Read real array, size 10, header "VDEP".)\
+ Reading VIMS(TRAD_COMM,REG,REG)\
+ (Read real array, size 8x10x10, header "VIMS".)\
+ Reading VIWS(TRAD_COMM,REG,REG)\
+ (Read real array, size 8x10x10, header "VIWS".)\
+ Reading VXWD(TRAD_COMM,REG,REG)\
+ (Read real array, size 8x10x10, header "VXWD".)\
+ Reading VXMD(TRAD_COMM,REG,REG)\
+ (Read real array, size 8x10x10, header "VXMD".)\
+ Reading VST(MARG_COMM,REG)\
+ (Read real array, size 1x10, header "VST".)\
+  Formula for 'VFA'\
+  Formula for 'VFA'\
+  Formula for 'VOA'\
+  Formula for 'VOA'\
+  Formula for 'VDM'\
+  Formula for 'VOM'\
+  Formula for 'VOM'\
+  Formula for 'VOM'\
+  Formula for 'VOM'\
+  Formula for 'VGA'\
+  Formula for 'GOVEXP'\
+  Formula for 'VPA'\
+  Formula for 'PRIVEXP'\
+  Formula for 'INCOME'\
+  Formula for 'DGTAX'\
+  Formula for 'IGTAX'\
+  Formula for 'TGC'\
+  Formula for 'DPTAX'\
+  Formula for 'IPTAX'\
+  Formula for 'TPC'\
+  Formula for 'DFTAX'\
+  Formula for 'IFTAX'\
+  Formula for 'TIU'\
+  Formula for 'ETAX'\
+  Formula for 'TFU'\
+  Formula for 'PTAX'\
+  Formula for 'TOUT'\
+  Formula for 'XTAXD'\
+  Formula for 'TEX'\
+  Formula for 'MTAX'\
+  Formula for 'TIM'\
+ (Opened, as header, existing file 'C:\\runGTAP375\\newtest\\default.prm'.)\
+ Reading ESUBD(TRAD_COMM)\
+ (Read real array, size 8, header "ESBD".)\
+  Formula for 'REGINV'\
+  Formula for 'NETINV'\
+  Formula for 'GLOBINV'\
+  Formula for 'CONSHR'\
+ Reading INCPAR(TRAD_COMM,REG)\
+    Mismatch between Header dimensions on file and coefficient dimensions.\
+    Dimensions on file       : 4 x 10\
+    Dimensions of coefficient: 8 x 10\
+\
+\
+ (ERROR RETURN FROM ROUTINE:set_header_data)\
+ (E-Mismatch between on file dimensions and coefficient dimensions)\
+\
+  (The program terminated with an error.)\
+  (The program has completed without warnings.)\
+\
+  Total elapsed time is:  1 seconds.\
+\
+ This run ended at 13:55:34 on 24-JUL-2022}
